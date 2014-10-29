@@ -50,6 +50,8 @@ int main(int argc, char *argv[])
     dpi = (int)densityDpi;
 
     env->PopLocalFrame(NULL);
+#else
+    dpi = qApp->primaryScreen()->physicalDotsPerInch();
 #endif
 
     QQmlApplicationEngine engine;

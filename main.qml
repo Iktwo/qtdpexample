@@ -22,15 +22,42 @@ Window {
     property double qldp: (qldpi / 160).toFixed(2)
     property double dp: (dpi / 160).toFixed(2)
 
+    property int isPortrait: height > width
+
     width: resolutions[currentResolution]["width"]
     height: resolutions[currentResolution]["height"]
 
     visible: true
 
+    Rectangle {
+        id: actionBar
+
+        width: parent.width
+        height: (isPortrait ? 48 : 40) * dp
+        color: "#e74c3c"
+
+        Text {
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
+
+            width: parent.width - (16 * dp)
+            color: "white"
+            text: qsTr("DP Example")
+        }
+    }
+
     ScrollView {
-        anchors.fill: parent
+        anchors {
+            top: actionBar.bottom
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
 
         flickableItem.interactive: true; focus: true
+        clip: true
 
         Flickable {
             anchors {
